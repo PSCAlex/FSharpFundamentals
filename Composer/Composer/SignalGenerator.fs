@@ -1,7 +1,5 @@
 ﻿module SignalGenerator
 
-open FSharp.Charting
-
 let generateSamples milliseconds frequency = 
     let sampleRate = 44100.
     let sixteenBitSampleLimit = 32767.
@@ -20,5 +18,4 @@ let generateSamples milliseconds frequency =
 
     Seq.map toAmplitude requiredSamples
 
-let points = generateSamples 150. 440.
-points |> Chart.Line 
+

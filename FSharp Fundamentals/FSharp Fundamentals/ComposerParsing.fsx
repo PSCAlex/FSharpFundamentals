@@ -64,8 +64,10 @@ let poctave = anyOf "123" |>> (function
                     | '3' -> Three
                     | unknown -> sprintf "Unknown octave %c" unknown |> failwith)
 
+let ptone = pipe2 pnote poctave (fun n o -> Tone(note = n, octave = o))
 
+let prest = stringReturn "-" Rest
 
-test poctave "2"
+let ptoken = pipe2 plength (prest <|> ptone) (fun l t -> {length = l; sound = t})
 
-test pmeasurefraction aspiration
+let pscore = sepBy ptoken (pstring " ")

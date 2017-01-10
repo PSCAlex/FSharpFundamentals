@@ -31,12 +31,16 @@ let pack(d:int16[]) =
     writer.Write(data)
     stream
 
-let write fileName (ms:MemoryStream) = 
+let writeSingle fileName (stream:MemoryStream) =
     use fs = new FileStream(Path.Combine(__SOURCE_DIRECTORY__, fileName), FileMode.Create)
-    ms.WriteTo(fs)
+    fs |> stream.WriteTo
 
-Array.ofSeq (generateSamples 1500. 220.)
-    |> pack
-    |> write "test2.wav"
+let write fileName (streams:MemoryStream list) = 
+    use fs = new FileStream(Path.Combine(__SOURCE_DIRECTORY__, fileName), FileMode.Create)
+    streams |> List.iter (fun stream -> stream.WriteTo fs) 
+
+//Array.ofSeq (generateSamples 1500. 220.)
+//    |> pack
+//    |> write "test2.wav"
 
 

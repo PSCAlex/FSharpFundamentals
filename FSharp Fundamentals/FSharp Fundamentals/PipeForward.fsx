@@ -15,6 +15,8 @@
 
 let square x = x * x
 
+let double x = x * 2
+
 3 |> double |> square 
 
 let (|<><><>|) a f = f a

@@ -17,7 +17,7 @@ let rec mapList f list =
 //function in the normal world
 let add1 x = x + 1
 
-//lift into worl of options 
+//lift into world of options 
 let add1IfSomething = Option.map add1
 
 //lift into world of lists 
